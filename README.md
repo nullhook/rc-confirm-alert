@@ -4,4 +4,4 @@
 `npm install react-alert`
 
 ## Usage
-coming soon
+`reactAlert()`
