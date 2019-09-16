@@ -8,6 +8,8 @@ Yet another confirm alert for React
 ## Usage
 
 ```javascript
+import { reactAlert } from 'rc-confirm-alert';
+
 reactAlert({
 	width: '500px',
 	title: 'Are you sure?',
@@ -23,6 +25,8 @@ reactAlert({
 Custom UI:
 
 ```javascript
+import { reactAlert } from 'rc-confirm-alert';
+
 reactAlert({
 	render: (props) => <CustomUI {...props} />
 });
