@@ -1,6 +1,6 @@
 # rc-confirm-alert
 
-Yet another confim alert for React
+Yet another confirm alert for React
 
 ## Installation
 `npm install rc-confirm-alert`
@@ -26,14 +26,4 @@ Custom UI:
 reactAlert({
 	render: (props) => <CustomUI {...props} />
 });
-```
-
-## Options
-```
-width,
-title,
-onCancel,
-onConfirm,
-render
-
 ```
