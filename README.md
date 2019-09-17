@@ -7,6 +7,8 @@ Yet another confirm alert for React
 
 ## Usage
 
+Use it as a function
+
 ```javascript
 import { reactAlert } from 'rc-confirm-alert';
 
