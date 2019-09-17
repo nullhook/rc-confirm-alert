@@ -9,12 +9,12 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/rehat101/react-alert"
+		"url": "https://github.com/rehat101/rc-confirm-alert"
 	},
 	"main": "./lib/index.js",
 	"license": "MIT",
 	"scripts": {
-		"build": "webpack"
+		"prepublishOnly": "webpack"
 	},
 	"peerDependencies": {
 		"react": "^16.8.0",
