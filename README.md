@@ -18,7 +18,7 @@ reactAlert({
 	},
 	onConfirm: () => {
 		doSomethingOnConfirm();
-	}
+	},
 });
 ```
 
@@ -28,6 +28,12 @@ Custom UI:
 import { reactAlert } from 'rc-confirm-alert';
 
 reactAlert({
-	render: (props) => <CustomUI {...props} />
+	render: (props) => <CustomUI {...props} />,
+	onCancel: () => { ... },
+	onConfirm: () => { ... },
 });
+```
+
+```javascript
+function customUI({ cancel, confirm }) { ... }
 ```
