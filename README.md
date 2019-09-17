@@ -33,5 +33,5 @@ reactAlert({
 ```
 
 ```javascript
-function customUI({ cancel, confirm }) { ... }
+function CustomUI({ cancel, confirm }) { ... }
 ```
