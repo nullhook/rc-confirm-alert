@@ -11,14 +11,10 @@ Yet another confirm alert for React
 import { reactAlert } from 'rc-confirm-alert';
 
 reactAlert({
-	width: '500px',
-	title: 'Are you sure?',
-	onCancel: () => {
-		doSomethingOnCancel();
-	},
-	onConfirm: () => {
-		doSomethingOnConfirm();
-	},
+  width: '500px',
+  title: 'Are you sure?',
+  onCancel: () => doSomethingOnCancel(),
+  onConfirm: () => doSomethingOnConfirm(),
 });
 ```
 
@@ -28,9 +24,9 @@ Custom UI:
 import { reactAlert } from 'rc-confirm-alert';
 
 reactAlert({
-	render: (props) => <CustomUI {...props} />,
-	onCancel: () => { ... },
-	onConfirm: () => { ... },
+  render: (props) => <CustomUI {...props} />,
+  onCancel: () => { ... },
+  onConfirm: () => { ... },
 });
 ```
 
