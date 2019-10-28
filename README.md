@@ -20,7 +20,23 @@ reactAlert({
 });
 ```
 
-Custom UI:
+Also supports hooks
+
+```javascript
+import { useReactAlert } from 'rc-confirm-alert';
+
+function UI() {
+	const dialog = useReactAlert();
+
+	return (
+		<React.Fragment>
+			<button onClick={() => dialog.open()}>Open Modal</button>
+		</React.Fragment>
+	);
+}
+```
+
+Custom UI
 
 ```javascript
 import { reactAlert } from 'rc-confirm-alert';
