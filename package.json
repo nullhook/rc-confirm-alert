@@ -15,7 +15,8 @@
 	"license": "MIT",
 	"scripts": {
 		"prepublishOnly": "webpack",
-		"storybook": "start-storybook"
+		"storybook": "start-storybook",
+		"bump": "npm version patch -m 'bump %s' && git push origin master && npm publish"
 	},
 	"peerDependencies": {
 		"react": ">=16.8.0",
