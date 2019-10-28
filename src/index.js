@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 const states = {
 	default: 'rgba(0,0,0,0.8)',
-}
+};
 
 const Scrim = styled.div`
-	background-color: ${props => states[props.bg] || states['default']};
+	background-color: ${(props) => states[props.bg] || states.default};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -20,8 +20,8 @@ const Scrim = styled.div`
 `;
 
 const Card = styled.div`
-	width: ${props => props.width || '200px'};
-	height: ${props => props.height || 'auto'};
+	width: ${(props) => props.width || '200px'};
+	height: ${(props) => props.height || 'auto'};
 	background-color: white;
 	border-radius: 8px;
 	padding: 2em;
@@ -47,82 +47,91 @@ const CancelBtn = styled(Btn)`
 	background-color: white;
 `;
 
-class ReactAlert extends Component {
-	constructor(props) {
-		super(props);
-		this.ref = React.createRef();
 
-		this.state = {
-			cancel: this.cancel,
-			confirm: this.confirm,
+class Store {
+	createNode() {
+		let div = document.getElementById('rc-alert');
+
+		if (div) {
+			return div;
 		}
-	}
 
-	overlayClick = (e) => {
-		if (this.ref.current === e.target) {
-			removeNode();
-		}
-	}
-
-	cancel = () => {
-		this.props.onCancel();
-		removeNode();
-	}
-
-	confirm = () => {
-		this.props.onConfirm();
-		removeNode();
-	}
-
-	render() {
-		const { bg, width, height, title, render } = this.props;
-
-		return (
-			<Scrim ref={this.ref} onClick={this.overlayClick} bg={bg}>
-				{ render
-					? render(this.state)
-					: (
-							<Card width={width} height={height}>
-								<h1>{title}</h1>
-								<CancelBtn onClick={this.cancel}>Cancel</CancelBtn>
-								{' '}
-								<Btn onClick={this.confirm}>Confirm</Btn>
-							</Card>
-						)
-				}
-			</Scrim>
-		);
-	}
-}
-
-ReactAlert.defaultProps = {
-	onConfirm: () => null,
-	onCancel: () => null,
-}
-
-function createNode() {
-	let div = document.getElementById('rc-alert');
-
-	if (div) {
+		div = document.createElement('div');
+		div.setAttribute('id', 'rc-alert');
+		document.body.appendChild(div);
 		return div;
 	}
 
-	div = document.createElement('div');
-	div.setAttribute('id', 'rc-alert');
-	document.body.appendChild(div);
-	return div;
+	removeNode() {
+		const div = document.getElementById('rc-alert');
+		ReactDOM.unmountComponentAtNode(div);
+		div.parentNode.removeChild(div);
+	}
 }
 
-function removeNode() {
-	const div = document.getElementById('rc-alert');
-	ReactDOM.unmountComponentAtNode(div);
-	div.parentNode.removeChild(div);
+
+function Alert({
+	store,
+	bg,
+	width,
+	height,
+	title,
+	render,
+	onCancel,
+	onConfirm,
+}) {
+	const scrimRef = React.useRef();
+
+	const handleConfirm = () => {
+		onConfirm();
+		store.removeNode();
+	};
+
+	const handleCancel = () => {
+		onCancel();
+		store.removeNode();
+	};
+
+	const handleOverlayClick = (e) => {
+		if (scrimRef.current === e.target) {
+			store.removeNode();
+		}
+	};
+
+	return (
+		<Scrim ref={scrimRef} onClick={handleOverlayClick} bg={bg}>
+			{ render
+				? render({ confirm: handleConfirm, cancel: handleCancel })
+				: (
+					<Card width={width} height={height}>
+						<h1>{title}</h1>
+						<CancelBtn onClick={handleCancel}>Cancel</CancelBtn>
+						{' '}
+						<Btn onClick={handleConfirm}>Confirm</Btn>
+					</Card>
+				)}
+		</Scrim>
+	);
 }
+
+Alert.defaultProps = {
+	onConfirm: () => null,
+	onCancel: () => null,
+};
 
 function reactAlert(props) {
-	const divTarget = createNode();
-	ReactDOM.render(<ReactAlert {...props} />, divTarget);
+	const ModalStore = new Store();
+
+	ReactDOM.render(<Alert {...props} />, ModalStore.createNode());
 }
 
+function useReactAlert(props) {
+	const ModalStore = new Store();
 
-export { reactAlert, Card }
+	return {
+		open: () => { ReactDOM.render(<Alert {...props} store={ModalStore} />, ModalStore.createNode()); },
+		close: () => ModalStore.removeNode(),
+	};
+}
+
+export { reactAlert, useReactAlert };
