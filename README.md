@@ -26,13 +26,13 @@ Also supports hooks
 import { useReactAlert } from 'rc-confirm-alert';
 
 function UI() {
-	const dialog = useReactAlert();
+  const dialog = useReactAlert();
 
-	return (
-		<React.Fragment>
-			<button onClick={() => dialog.open()}>Open Modal</button>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <button onClick={() => dialog.open()}>Open Modal</button>
+    </React.Fragment>
+  );
 }
 ```
 
