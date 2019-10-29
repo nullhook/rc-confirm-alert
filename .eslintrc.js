@@ -15,6 +15,7 @@ module.exports = {
 		"react/jsx-no-bind": 0,
 		"import/extensions": 0,
 		"class-methods-use-this": 0,
+		"react/jsx-fragments": 0,
 		"indent": [2, "tab"],
 		"react/jsx-indent": [2, "tab"],
 		"no-tabs": 0,
