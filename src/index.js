@@ -8,6 +8,7 @@ const states = {
 
 const Scrim = styled.div`
 	background-color: ${(props) => states[props.bg] || states.default};
+	font-family: sans-serif;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -104,7 +105,7 @@ function Alert({
 				? render({ confirm: handleConfirm, cancel: handleCancel })
 				: (
 					<Card width={width} height={height}>
-						<h1>{title}</h1>
+						<h2>{title}</h2>
 						<CancelBtn onClick={handleCancel}>Cancel</CancelBtn>
 						{' '}
 						<Btn onClick={handleConfirm}>Confirm</Btn>
@@ -117,6 +118,8 @@ function Alert({
 Alert.defaultProps = {
 	onConfirm: () => null,
 	onCancel: () => null,
+	width: 500,
+	title: 'Are you sure?',
 };
 
 function reactAlert(props) {
